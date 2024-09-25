@@ -131,11 +131,6 @@ exports.Prisma.SongScalarFieldEnum = {
   length: 'length'
 };
 
-exports.Prisma.SukaScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -149,8 +144,7 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Song: 'Song',
-  suka: 'suka'
+  Song: 'Song'
 };
 
 /**
