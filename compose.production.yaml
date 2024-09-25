@@ -1,0 +1,41 @@
+# === Production config
+name: vinyl-prod
+
+services:
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: ${PROD_POSTGRES_ROOT_PASSWORD}
+      POSTGRES_USER_PASSWORD: ${PROD_POSTGRES_USER_PASSWORD}
+    networks:
+      - prod
+
+  backend:
+    environment:
+      DATABASE_URL: ${PROD_DATABASE_URL}
+    build: 
+      context: ./
+      dockerfile: ./apps/backend/Dockerfile
+      target: prod
+    networks:
+      - prod
+    
+  frontend:
+    build: 
+      context: ./
+      dockerfile: ./apps/frontend/Dockerfile
+      target: prod
+    networks:
+      - prod
+
+  nginx:
+    image: nginx:1.27.1
+    volumes:
+      - ./apps/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    networks:
+      - prod
+
+networks:
+  prod:
+    driver: bridge

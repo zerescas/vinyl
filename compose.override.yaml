@@ -1,0 +1,36 @@
+# === Dev config
+name: vinyl-dev
+
+services:
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: ${DEV_POSTGRES_ROOT_PASSWORD}
+      POSTGRES_USER_PASSWORD: ${DEV_POSTGRES_USER_PASSWORD}
+
+  backend:
+    tty: true
+    environment:
+      DATABASE_URL: ${DEV_DATABASE_URL}
+    build:
+      context: ./
+      dockerfile: ./apps/backend/Dockerfile
+      target: dev
+    volumes:
+      - ./apps/backend:/app:z
+      - /app/node_modules
+      - ./libs:/app/libs
+    ports:
+      - "9000:9000"
+
+  frontend:
+    tty: true
+    build:
+      context: ./
+      dockerfile: ./apps/frontend/Dockerfile
+      target: dev
+    volumes:
+      - ./apps/frontend:/app:z
+      - /app/node_modules
+      - ./libs:/app/libs
+    ports:
+      - "3000:3000"
