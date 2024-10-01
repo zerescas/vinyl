@@ -1,3 +1,5 @@
+.server-controller-port.log
+
 # Local env files
 .env
 .env.*
