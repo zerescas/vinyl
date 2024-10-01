@@ -5,6 +5,10 @@ useHead({
     class: "bg-zinc-950 text-zinc-200",
   },
 });
+
+onMounted(() => {
+  defineColorShadesFromSongImage("placeholder");
+});
 </script>
 
 <template>
