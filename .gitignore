@@ -1,5 +1,8 @@
 .server-controller-port.log
 
+# Prisma
+/libs/prisma/client/*.node
+
 # Stylelint / ESLint caches
 .stylelintcache
 .eslintcache
