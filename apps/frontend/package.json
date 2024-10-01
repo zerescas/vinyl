@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@jiaminghi/color": "^1.1.3",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@vueuse/core": "^11.1.0",
     "nuxt": "^3.13.0",
