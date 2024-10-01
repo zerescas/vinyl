@@ -1,6 +1,14 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-recommended-vue"
-  ]
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended-vue"],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": ["theme", "v-bind"]
+      }
+    ],
+    "value-keyword-case": null,
+    "order/properties-alphabetical-order": true
+  }
 }
