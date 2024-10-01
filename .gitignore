@@ -1,5 +1,9 @@
 .server-controller-port.log
 
+# Stylelint / ESLint caches
+.stylelintcache
+.eslintcache
+
 # Local env files
 .env
 .env.*
