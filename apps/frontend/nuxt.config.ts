@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     ["@nuxtjs/stylelint-module", { fix: true }],
     "unplugin-icons/nuxt",
     "@nuxtjs/tailwindcss",
+    "@pinia/nuxt",
   ],
 
   devtools: {
