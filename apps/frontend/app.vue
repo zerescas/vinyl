@@ -1,3 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+  title: "Vinyl",
+  bodyAttrs: {
+    class: "bg-zinc-950 text-zinc-200",
+  },
+});
+</script>
 
-<template>App</template>
+<template>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+</template>
