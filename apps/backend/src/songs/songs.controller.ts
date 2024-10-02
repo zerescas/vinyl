@@ -18,10 +18,10 @@ export class SongsController {
   @Post()
   async create(@Body() songData: Song) {
     const { name, length } = songData;
-    
+
     return this.songsService.create({
       name,
-      length: parseFloat(length.toString())
+      length: parseFloat(length.toString()),
     });
   }
 
@@ -34,7 +34,7 @@ export class SongsController {
   async findOne(@Param("id") id: string) {
     const song = await this.songsService.findOne(+id);
 
-    if(!song) {
+    if (!song) {
       throw new NotFoundException(`Song with id:${id} doesn't exist.`);
     }
 
@@ -42,10 +42,7 @@ export class SongsController {
   }
 
   @Patch(":id")
-  async update(
-    @Param("id") id: string, 
-    @Body() songData: Song
-  ) {
+  async update(@Param("id") id: string, @Body() songData: Song) {
     return this.songsService.update(+id, songData);
   }
 

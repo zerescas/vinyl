@@ -27,17 +27,17 @@ export class SongsService {
   async update(id: number, data: Prisma.SongUpdateInput) {
     return this.prisma.song.update({
       where: {
-        id
+        id,
       },
-      data
-    })
+      data,
+    });
   }
 
   async remove(id: number) {
     return this.prisma.song.delete({
-      where:{
+      where: {
         id,
-      }
+      },
     });
   }
 }
