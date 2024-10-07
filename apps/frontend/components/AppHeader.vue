@@ -28,5 +28,7 @@ const { isExpanded } = storeToRefs(sidebarStore);
       >
       <span>inyl</span>
     </RouterLink>
+
+    <AppUserWidget class="ml-auto" />
   </div>
 </template>
