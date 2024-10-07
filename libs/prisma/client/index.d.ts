@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model UserRefreshToken
+ * 
+ */
+export type UserRefreshToken = $Result.DefaultSelection<Prisma.$UserRefreshTokenPayload>
+/**
  * Model Song
  * 
  */
@@ -158,6 +163,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
+   * `prisma.userRefreshToken`: Exposes CRUD operations for the **UserRefreshToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserRefreshTokens
+    * const userRefreshTokens = await prisma.userRefreshToken.findMany()
+    * ```
+    */
+  get userRefreshToken(): Prisma.UserRefreshTokenDelegate<ExtArgs>;
+
+  /**
    * `prisma.song`: Exposes CRUD operations for the **Song** model.
     * Example usage:
     * ```ts
@@ -224,7 +239,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.19.1
-   * Query Engine version: 06fc58a368dc7be9fbbbe894adf8d445d208c284
+   * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
    */
   export type PrismaVersion = {
     client: string
@@ -606,6 +621,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    UserRefreshToken: 'UserRefreshToken',
     Song: 'Song'
   };
 
@@ -622,7 +638,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "song"
+      modelProps: "user" | "userRefreshToken" | "song"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -693,6 +709,76 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserRefreshToken: {
+        payload: Prisma.$UserRefreshTokenPayload<ExtArgs>
+        fields: Prisma.UserRefreshTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserRefreshTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserRefreshTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.UserRefreshTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserRefreshTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>
+          }
+          findMany: {
+            args: Prisma.UserRefreshTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>[]
+          }
+          create: {
+            args: Prisma.UserRefreshTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>
+          }
+          createMany: {
+            args: Prisma.UserRefreshTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserRefreshTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.UserRefreshTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>
+          }
+          update: {
+            args: Prisma.UserRefreshTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserRefreshTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserRefreshTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserRefreshTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserRefreshTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.UserRefreshTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserRefreshToken>
+          }
+          groupBy: {
+            args: Prisma.UserRefreshTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserRefreshTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserRefreshTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<UserRefreshTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -922,6 +1008,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    userRefreshTokens: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userRefreshTokens?: boolean | UserCountOutputTypeCountUserRefreshTokensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserRefreshTokenWhereInput
+  }
+
 
   /**
    * Models
@@ -949,20 +1065,32 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: number | null
-    name: string | null
+    username: string | null
     email: string | null
+    password: string | null
+    name: string | null
+    lastName: string | null
+    createdAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number | null
-    name: string | null
+    username: string | null
     email: string | null
+    password: string | null
+    name: string | null
+    lastName: string | null
+    createdAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    name: number
+    username: number
     email: number
+    password: number
+    name: number
+    lastName: number
+    createdAt: number
     _all: number
   }
 
@@ -977,20 +1105,32 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
-    name?: true
+    username?: true
     email?: true
+    password?: true
+    name?: true
+    lastName?: true
+    createdAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
-    name?: true
+    username?: true
     email?: true
+    password?: true
+    name?: true
+    lastName?: true
+    createdAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
-    name?: true
+    username?: true
     email?: true
+    password?: true
+    name?: true
+    lastName?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -1082,8 +1222,12 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: number
-    name: string
+    username: string
     email: string
+    password: string
+    name: string
+    lastName: string
+    createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1107,30 +1251,55 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    username?: boolean
     email?: boolean
+    password?: boolean
+    name?: boolean
+    lastName?: boolean
+    createdAt?: boolean
+    userRefreshTokens?: boolean | User$userRefreshTokensArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    username?: boolean
     email?: boolean
+    password?: boolean
+    name?: boolean
+    lastName?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
-    name?: boolean
+    username?: boolean
     email?: boolean
+    password?: boolean
+    name?: boolean
+    lastName?: boolean
+    createdAt?: boolean
   }
 
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userRefreshTokens?: boolean | User$userRefreshTokensArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      userRefreshTokens: Prisma.$UserRefreshTokenPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
+      username: string
       email: string
+      password: string
+      name: string
+      lastName: string
+      createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1495,6 +1664,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    userRefreshTokens<T extends User$userRefreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$userRefreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1525,8 +1695,12 @@ export namespace Prisma {
    */ 
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'Int'>
-    readonly name: FieldRef<"User", 'String'>
+    readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly lastName: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -1539,6 +1713,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1554,6 +1732,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1567,6 +1749,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1612,6 +1798,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1656,6 +1846,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -1694,6 +1888,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -1735,6 +1933,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The data needed to update a User.
      */
     data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
@@ -1767,6 +1969,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1789,6 +1995,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1805,6 +2015,26 @@ export namespace Prisma {
   }
 
   /**
+   * User.userRefreshTokens
+   */
+  export type User$userRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    where?: UserRefreshTokenWhereInput
+    orderBy?: UserRefreshTokenOrderByWithRelationInput | UserRefreshTokenOrderByWithRelationInput[]
+    cursor?: UserRefreshTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserRefreshTokenScalarFieldEnum | UserRefreshTokenScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1812,6 +2042,1005 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserRefreshToken
+   */
+
+  export type AggregateUserRefreshToken = {
+    _count: UserRefreshTokenCountAggregateOutputType | null
+    _avg: UserRefreshTokenAvgAggregateOutputType | null
+    _sum: UserRefreshTokenSumAggregateOutputType | null
+    _min: UserRefreshTokenMinAggregateOutputType | null
+    _max: UserRefreshTokenMaxAggregateOutputType | null
+  }
+
+  export type UserRefreshTokenAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    createdAt: number | null
+    usedAt: number | null
+    expiresAt: number | null
+  }
+
+  export type UserRefreshTokenSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    createdAt: bigint | null
+    usedAt: bigint | null
+    expiresAt: bigint | null
+  }
+
+  export type UserRefreshTokenMinAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    token: string | null
+    createdAt: bigint | null
+    usedAt: bigint | null
+    expiresAt: bigint | null
+  }
+
+  export type UserRefreshTokenMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    token: string | null
+    createdAt: bigint | null
+    usedAt: bigint | null
+    expiresAt: bigint | null
+  }
+
+  export type UserRefreshTokenCountAggregateOutputType = {
+    id: number
+    userId: number
+    token: number
+    createdAt: number
+    usedAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type UserRefreshTokenAvgAggregateInputType = {
+    id?: true
+    userId?: true
+    createdAt?: true
+    usedAt?: true
+    expiresAt?: true
+  }
+
+  export type UserRefreshTokenSumAggregateInputType = {
+    id?: true
+    userId?: true
+    createdAt?: true
+    usedAt?: true
+    expiresAt?: true
+  }
+
+  export type UserRefreshTokenMinAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    createdAt?: true
+    usedAt?: true
+    expiresAt?: true
+  }
+
+  export type UserRefreshTokenMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    createdAt?: true
+    usedAt?: true
+    expiresAt?: true
+  }
+
+  export type UserRefreshTokenCountAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    createdAt?: true
+    usedAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type UserRefreshTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserRefreshToken to aggregate.
+     */
+    where?: UserRefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserRefreshTokens to fetch.
+     */
+    orderBy?: UserRefreshTokenOrderByWithRelationInput | UserRefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserRefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserRefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserRefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserRefreshTokens
+    **/
+    _count?: true | UserRefreshTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserRefreshTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserRefreshTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserRefreshTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserRefreshTokenMaxAggregateInputType
+  }
+
+  export type GetUserRefreshTokenAggregateType<T extends UserRefreshTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserRefreshToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserRefreshToken[P]>
+      : GetScalarType<T[P], AggregateUserRefreshToken[P]>
+  }
+
+
+
+
+  export type UserRefreshTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserRefreshTokenWhereInput
+    orderBy?: UserRefreshTokenOrderByWithAggregationInput | UserRefreshTokenOrderByWithAggregationInput[]
+    by: UserRefreshTokenScalarFieldEnum[] | UserRefreshTokenScalarFieldEnum
+    having?: UserRefreshTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserRefreshTokenCountAggregateInputType | true
+    _avg?: UserRefreshTokenAvgAggregateInputType
+    _sum?: UserRefreshTokenSumAggregateInputType
+    _min?: UserRefreshTokenMinAggregateInputType
+    _max?: UserRefreshTokenMaxAggregateInputType
+  }
+
+  export type UserRefreshTokenGroupByOutputType = {
+    id: number
+    userId: number
+    token: string
+    createdAt: bigint
+    usedAt: bigint
+    expiresAt: bigint
+    _count: UserRefreshTokenCountAggregateOutputType | null
+    _avg: UserRefreshTokenAvgAggregateOutputType | null
+    _sum: UserRefreshTokenSumAggregateOutputType | null
+    _min: UserRefreshTokenMinAggregateOutputType | null
+    _max: UserRefreshTokenMaxAggregateOutputType | null
+  }
+
+  type GetUserRefreshTokenGroupByPayload<T extends UserRefreshTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserRefreshTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserRefreshTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserRefreshTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], UserRefreshTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserRefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userRefreshToken"]>
+
+  export type UserRefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userRefreshToken"]>
+
+  export type UserRefreshTokenSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    createdAt?: boolean
+    usedAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type UserRefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserRefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserRefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserRefreshToken"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: number
+      token: string
+      createdAt: bigint
+      usedAt: bigint
+      expiresAt: bigint
+    }, ExtArgs["result"]["userRefreshToken"]>
+    composites: {}
+  }
+
+  type UserRefreshTokenGetPayload<S extends boolean | null | undefined | UserRefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$UserRefreshTokenPayload, S>
+
+  type UserRefreshTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserRefreshTokenFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserRefreshTokenCountAggregateInputType | true
+    }
+
+  export interface UserRefreshTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserRefreshToken'], meta: { name: 'UserRefreshToken' } }
+    /**
+     * Find zero or one UserRefreshToken that matches the filter.
+     * @param {UserRefreshTokenFindUniqueArgs} args - Arguments to find a UserRefreshToken
+     * @example
+     * // Get one UserRefreshToken
+     * const userRefreshToken = await prisma.userRefreshToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserRefreshTokenFindUniqueArgs>(args: SelectSubset<T, UserRefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserRefreshToken that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserRefreshTokenFindUniqueOrThrowArgs} args - Arguments to find a UserRefreshToken
+     * @example
+     * // Get one UserRefreshToken
+     * const userRefreshToken = await prisma.userRefreshToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserRefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, UserRefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserRefreshToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenFindFirstArgs} args - Arguments to find a UserRefreshToken
+     * @example
+     * // Get one UserRefreshToken
+     * const userRefreshToken = await prisma.userRefreshToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserRefreshTokenFindFirstArgs>(args?: SelectSubset<T, UserRefreshTokenFindFirstArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserRefreshToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenFindFirstOrThrowArgs} args - Arguments to find a UserRefreshToken
+     * @example
+     * // Get one UserRefreshToken
+     * const userRefreshToken = await prisma.userRefreshToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserRefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, UserRefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserRefreshTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserRefreshTokens
+     * const userRefreshTokens = await prisma.userRefreshToken.findMany()
+     * 
+     * // Get first 10 UserRefreshTokens
+     * const userRefreshTokens = await prisma.userRefreshToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userRefreshTokenWithIdOnly = await prisma.userRefreshToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserRefreshTokenFindManyArgs>(args?: SelectSubset<T, UserRefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserRefreshToken.
+     * @param {UserRefreshTokenCreateArgs} args - Arguments to create a UserRefreshToken.
+     * @example
+     * // Create one UserRefreshToken
+     * const UserRefreshToken = await prisma.userRefreshToken.create({
+     *   data: {
+     *     // ... data to create a UserRefreshToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserRefreshTokenCreateArgs>(args: SelectSubset<T, UserRefreshTokenCreateArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserRefreshTokens.
+     * @param {UserRefreshTokenCreateManyArgs} args - Arguments to create many UserRefreshTokens.
+     * @example
+     * // Create many UserRefreshTokens
+     * const userRefreshToken = await prisma.userRefreshToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserRefreshTokenCreateManyArgs>(args?: SelectSubset<T, UserRefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserRefreshTokens and returns the data saved in the database.
+     * @param {UserRefreshTokenCreateManyAndReturnArgs} args - Arguments to create many UserRefreshTokens.
+     * @example
+     * // Create many UserRefreshTokens
+     * const userRefreshToken = await prisma.userRefreshToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserRefreshTokens and only return the `id`
+     * const userRefreshTokenWithIdOnly = await prisma.userRefreshToken.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserRefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, UserRefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserRefreshToken.
+     * @param {UserRefreshTokenDeleteArgs} args - Arguments to delete one UserRefreshToken.
+     * @example
+     * // Delete one UserRefreshToken
+     * const UserRefreshToken = await prisma.userRefreshToken.delete({
+     *   where: {
+     *     // ... filter to delete one UserRefreshToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserRefreshTokenDeleteArgs>(args: SelectSubset<T, UserRefreshTokenDeleteArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserRefreshToken.
+     * @param {UserRefreshTokenUpdateArgs} args - Arguments to update one UserRefreshToken.
+     * @example
+     * // Update one UserRefreshToken
+     * const userRefreshToken = await prisma.userRefreshToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserRefreshTokenUpdateArgs>(args: SelectSubset<T, UserRefreshTokenUpdateArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserRefreshTokens.
+     * @param {UserRefreshTokenDeleteManyArgs} args - Arguments to filter UserRefreshTokens to delete.
+     * @example
+     * // Delete a few UserRefreshTokens
+     * const { count } = await prisma.userRefreshToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserRefreshTokenDeleteManyArgs>(args?: SelectSubset<T, UserRefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserRefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserRefreshTokens
+     * const userRefreshToken = await prisma.userRefreshToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserRefreshTokenUpdateManyArgs>(args: SelectSubset<T, UserRefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserRefreshToken.
+     * @param {UserRefreshTokenUpsertArgs} args - Arguments to update or create a UserRefreshToken.
+     * @example
+     * // Update or create a UserRefreshToken
+     * const userRefreshToken = await prisma.userRefreshToken.upsert({
+     *   create: {
+     *     // ... data to create a UserRefreshToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserRefreshToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserRefreshTokenUpsertArgs>(args: SelectSubset<T, UserRefreshTokenUpsertArgs<ExtArgs>>): Prisma__UserRefreshTokenClient<$Result.GetResult<Prisma.$UserRefreshTokenPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserRefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenCountArgs} args - Arguments to filter UserRefreshTokens to count.
+     * @example
+     * // Count the number of UserRefreshTokens
+     * const count = await prisma.userRefreshToken.count({
+     *   where: {
+     *     // ... the filter for the UserRefreshTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserRefreshTokenCountArgs>(
+      args?: Subset<T, UserRefreshTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserRefreshTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserRefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserRefreshTokenAggregateArgs>(args: Subset<T, UserRefreshTokenAggregateArgs>): Prisma.PrismaPromise<GetUserRefreshTokenAggregateType<T>>
+
+    /**
+     * Group by UserRefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserRefreshTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserRefreshTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserRefreshTokenGroupByArgs['orderBy'] }
+        : { orderBy?: UserRefreshTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserRefreshTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserRefreshTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserRefreshToken model
+   */
+  readonly fields: UserRefreshTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserRefreshToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserRefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserRefreshToken model
+   */ 
+  interface UserRefreshTokenFieldRefs {
+    readonly id: FieldRef<"UserRefreshToken", 'Int'>
+    readonly userId: FieldRef<"UserRefreshToken", 'Int'>
+    readonly token: FieldRef<"UserRefreshToken", 'String'>
+    readonly createdAt: FieldRef<"UserRefreshToken", 'BigInt'>
+    readonly usedAt: FieldRef<"UserRefreshToken", 'BigInt'>
+    readonly expiresAt: FieldRef<"UserRefreshToken", 'BigInt'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserRefreshToken findUnique
+   */
+  export type UserRefreshTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which UserRefreshToken to fetch.
+     */
+    where: UserRefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * UserRefreshToken findUniqueOrThrow
+   */
+  export type UserRefreshTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which UserRefreshToken to fetch.
+     */
+    where: UserRefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * UserRefreshToken findFirst
+   */
+  export type UserRefreshTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which UserRefreshToken to fetch.
+     */
+    where?: UserRefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserRefreshTokens to fetch.
+     */
+    orderBy?: UserRefreshTokenOrderByWithRelationInput | UserRefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserRefreshTokens.
+     */
+    cursor?: UserRefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserRefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserRefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserRefreshTokens.
+     */
+    distinct?: UserRefreshTokenScalarFieldEnum | UserRefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * UserRefreshToken findFirstOrThrow
+   */
+  export type UserRefreshTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which UserRefreshToken to fetch.
+     */
+    where?: UserRefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserRefreshTokens to fetch.
+     */
+    orderBy?: UserRefreshTokenOrderByWithRelationInput | UserRefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserRefreshTokens.
+     */
+    cursor?: UserRefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserRefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserRefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserRefreshTokens.
+     */
+    distinct?: UserRefreshTokenScalarFieldEnum | UserRefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * UserRefreshToken findMany
+   */
+  export type UserRefreshTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which UserRefreshTokens to fetch.
+     */
+    where?: UserRefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserRefreshTokens to fetch.
+     */
+    orderBy?: UserRefreshTokenOrderByWithRelationInput | UserRefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserRefreshTokens.
+     */
+    cursor?: UserRefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserRefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserRefreshTokens.
+     */
+    skip?: number
+    distinct?: UserRefreshTokenScalarFieldEnum | UserRefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * UserRefreshToken create
+   */
+  export type UserRefreshTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserRefreshToken.
+     */
+    data: XOR<UserRefreshTokenCreateInput, UserRefreshTokenUncheckedCreateInput>
+  }
+
+  /**
+   * UserRefreshToken createMany
+   */
+  export type UserRefreshTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserRefreshTokens.
+     */
+    data: UserRefreshTokenCreateManyInput | UserRefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserRefreshToken createManyAndReturn
+   */
+  export type UserRefreshTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserRefreshTokens.
+     */
+    data: UserRefreshTokenCreateManyInput | UserRefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserRefreshToken update
+   */
+  export type UserRefreshTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserRefreshToken.
+     */
+    data: XOR<UserRefreshTokenUpdateInput, UserRefreshTokenUncheckedUpdateInput>
+    /**
+     * Choose, which UserRefreshToken to update.
+     */
+    where: UserRefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * UserRefreshToken updateMany
+   */
+  export type UserRefreshTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserRefreshTokens.
+     */
+    data: XOR<UserRefreshTokenUpdateManyMutationInput, UserRefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which UserRefreshTokens to update
+     */
+    where?: UserRefreshTokenWhereInput
+  }
+
+  /**
+   * UserRefreshToken upsert
+   */
+  export type UserRefreshTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserRefreshToken to update in case it exists.
+     */
+    where: UserRefreshTokenWhereUniqueInput
+    /**
+     * In case the UserRefreshToken found by the `where` argument doesn't exist, create a new UserRefreshToken with this data.
+     */
+    create: XOR<UserRefreshTokenCreateInput, UserRefreshTokenUncheckedCreateInput>
+    /**
+     * In case the UserRefreshToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserRefreshTokenUpdateInput, UserRefreshTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * UserRefreshToken delete
+   */
+  export type UserRefreshTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter which UserRefreshToken to delete.
+     */
+    where: UserRefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * UserRefreshToken deleteMany
+   */
+  export type UserRefreshTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserRefreshTokens to delete
+     */
+    where?: UserRefreshTokenWhereInput
+  }
+
+  /**
+   * UserRefreshToken without action
+   */
+  export type UserRefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserRefreshToken
+     */
+    select?: UserRefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserRefreshTokenInclude<ExtArgs> | null
   }
 
 
@@ -2723,11 +3952,27 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
+    username: 'username',
+    email: 'email',
+    password: 'password',
     name: 'name',
-    email: 'email'
+    lastName: 'lastName',
+    createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const UserRefreshTokenScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    token: 'token',
+    createdAt: 'createdAt',
+    usedAt: 'usedAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type UserRefreshTokenScalarFieldEnum = (typeof UserRefreshTokenScalarFieldEnum)[keyof typeof UserRefreshTokenScalarFieldEnum]
 
 
   export const SongScalarFieldEnum: {
@@ -2789,6 +4034,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt[]'
+   */
+  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2810,29 +4083,48 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
-    name?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    lastName?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    userRefreshTokens?: UserRefreshTokenListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    lastName?: SortOrder
+    createdAt?: SortOrder
+    userRefreshTokens?: UserRefreshTokenOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    username?: string
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
-  }, "id" | "email">
+    lastName?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    userRefreshTokens?: UserRefreshTokenListRelationFilter
+  }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    lastName?: SortOrder
+    createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -2845,8 +4137,74 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
-    name?: StringWithAggregatesFilter<"User"> | string
+    username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    name?: StringWithAggregatesFilter<"User"> | string
+    lastName?: StringWithAggregatesFilter<"User"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type UserRefreshTokenWhereInput = {
+    AND?: UserRefreshTokenWhereInput | UserRefreshTokenWhereInput[]
+    OR?: UserRefreshTokenWhereInput[]
+    NOT?: UserRefreshTokenWhereInput | UserRefreshTokenWhereInput[]
+    id?: IntFilter<"UserRefreshToken"> | number
+    userId?: IntFilter<"UserRefreshToken"> | number
+    token?: StringFilter<"UserRefreshToken"> | string
+    createdAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    usedAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    expiresAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type UserRefreshTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserRefreshTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: UserRefreshTokenWhereInput | UserRefreshTokenWhereInput[]
+    OR?: UserRefreshTokenWhereInput[]
+    NOT?: UserRefreshTokenWhereInput | UserRefreshTokenWhereInput[]
+    userId?: IntFilter<"UserRefreshToken"> | number
+    token?: StringFilter<"UserRefreshToken"> | string
+    createdAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    usedAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    expiresAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UserRefreshTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+    _count?: UserRefreshTokenCountOrderByAggregateInput
+    _avg?: UserRefreshTokenAvgOrderByAggregateInput
+    _max?: UserRefreshTokenMaxOrderByAggregateInput
+    _min?: UserRefreshTokenMinOrderByAggregateInput
+    _sum?: UserRefreshTokenSumOrderByAggregateInput
+  }
+
+  export type UserRefreshTokenScalarWhereWithAggregatesInput = {
+    AND?: UserRefreshTokenScalarWhereWithAggregatesInput | UserRefreshTokenScalarWhereWithAggregatesInput[]
+    OR?: UserRefreshTokenScalarWhereWithAggregatesInput[]
+    NOT?: UserRefreshTokenScalarWhereWithAggregatesInput | UserRefreshTokenScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserRefreshToken"> | number
+    userId?: IntWithAggregatesFilter<"UserRefreshToken"> | number
+    token?: StringWithAggregatesFilter<"UserRefreshToken"> | string
+    createdAt?: BigIntWithAggregatesFilter<"UserRefreshToken"> | bigint | number
+    usedAt?: BigIntWithAggregatesFilter<"UserRefreshToken"> | bigint | number
+    expiresAt?: BigIntWithAggregatesFilter<"UserRefreshToken"> | bigint | number
   }
 
   export type SongWhereInput = {
@@ -2894,42 +4252,133 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
-    name: string
+    username: string
     email: string
+    password: string
+    name: string
+    lastName: string
+    createdAt?: Date | string
+    userRefreshTokens?: UserRefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
-    name: string
+    username: string
     email: string
+    password: string
+    name: string
+    lastName: string
+    createdAt?: Date | string
+    userRefreshTokens?: UserRefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRefreshTokens?: UserRefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRefreshTokens?: UserRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: number
-    name: string
+    username: string
     email: string
+    password: string
+    name: string
+    lastName: string
+    createdAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserRefreshTokenCreateInput = {
+    token: string
+    createdAt: bigint | number
+    usedAt: bigint | number
+    expiresAt: bigint | number
+    user: UserCreateNestedOneWithoutUserRefreshTokensInput
+  }
+
+  export type UserRefreshTokenUncheckedCreateInput = {
+    id?: number
+    userId: number
+    token: string
+    createdAt: bigint | number
+    usedAt: bigint | number
+    expiresAt: bigint | number
+  }
+
+  export type UserRefreshTokenUpdateInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    user?: UserUpdateOneRequiredWithoutUserRefreshTokensNestedInput
+  }
+
+  export type UserRefreshTokenUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type UserRefreshTokenCreateManyInput = {
+    id?: number
+    userId: number
+    token: string
+    createdAt: bigint | number
+    usedAt: bigint | number
+    expiresAt: bigint | number
+  }
+
+  export type UserRefreshTokenUpdateManyMutationInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type UserRefreshTokenUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type SongCreateInput = {
@@ -2997,10 +4446,35 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type UserRefreshTokenListRelationFilter = {
+    every?: UserRefreshTokenWhereInput
+    some?: UserRefreshTokenWhereInput
+    none?: UserRefreshTokenWhereInput
+  }
+
+  export type UserRefreshTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    lastName?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -3009,14 +4483,22 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    lastName?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    username?: SortOrder
     email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    lastName?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -3055,6 +4537,95 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type UserRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type UserRefreshTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UserRefreshTokenAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UserRefreshTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UserRefreshTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type UserRefreshTokenSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -3112,8 +4683,40 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type UserRefreshTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserRefreshTokenCreateWithoutUserInput, UserRefreshTokenUncheckedCreateWithoutUserInput> | UserRefreshTokenCreateWithoutUserInput[] | UserRefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRefreshTokenCreateOrConnectWithoutUserInput | UserRefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: UserRefreshTokenCreateManyUserInputEnvelope
+    connect?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+  }
+
+  export type UserRefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserRefreshTokenCreateWithoutUserInput, UserRefreshTokenUncheckedCreateWithoutUserInput> | UserRefreshTokenCreateWithoutUserInput[] | UserRefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRefreshTokenCreateOrConnectWithoutUserInput | UserRefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: UserRefreshTokenCreateManyUserInputEnvelope
+    connect?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type UserRefreshTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserRefreshTokenCreateWithoutUserInput, UserRefreshTokenUncheckedCreateWithoutUserInput> | UserRefreshTokenCreateWithoutUserInput[] | UserRefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRefreshTokenCreateOrConnectWithoutUserInput | UserRefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: UserRefreshTokenUpsertWithWhereUniqueWithoutUserInput | UserRefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserRefreshTokenCreateManyUserInputEnvelope
+    set?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    disconnect?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    delete?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    connect?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    update?: UserRefreshTokenUpdateWithWhereUniqueWithoutUserInput | UserRefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserRefreshTokenUpdateManyWithWhereWithoutUserInput | UserRefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserRefreshTokenScalarWhereInput | UserRefreshTokenScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3122,6 +4725,42 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type UserRefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserRefreshTokenCreateWithoutUserInput, UserRefreshTokenUncheckedCreateWithoutUserInput> | UserRefreshTokenCreateWithoutUserInput[] | UserRefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRefreshTokenCreateOrConnectWithoutUserInput | UserRefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: UserRefreshTokenUpsertWithWhereUniqueWithoutUserInput | UserRefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserRefreshTokenCreateManyUserInputEnvelope
+    set?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    disconnect?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    delete?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    connect?: UserRefreshTokenWhereUniqueInput | UserRefreshTokenWhereUniqueInput[]
+    update?: UserRefreshTokenUpdateWithWhereUniqueWithoutUserInput | UserRefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserRefreshTokenUpdateManyWithWhereWithoutUserInput | UserRefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserRefreshTokenScalarWhereInput | UserRefreshTokenScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutUserRefreshTokensInput = {
+    create?: XOR<UserCreateWithoutUserRefreshTokensInput, UserUncheckedCreateWithoutUserRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserRefreshTokensInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type UserUpdateOneRequiredWithoutUserRefreshTokensNestedInput = {
+    create?: XOR<UserCreateWithoutUserRefreshTokensInput, UserUncheckedCreateWithoutUserRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserRefreshTokensInput
+    upsert?: UserUpsertWithoutUserRefreshTokensInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserRefreshTokensInput, UserUpdateWithoutUserRefreshTokensInput>, UserUncheckedUpdateWithoutUserRefreshTokensInput>
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -3155,6 +4794,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3201,6 +4851,47 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -3217,15 +4908,161 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type UserRefreshTokenCreateWithoutUserInput = {
+    token: string
+    createdAt: bigint | number
+    usedAt: bigint | number
+    expiresAt: bigint | number
+  }
+
+  export type UserRefreshTokenUncheckedCreateWithoutUserInput = {
+    id?: number
+    token: string
+    createdAt: bigint | number
+    usedAt: bigint | number
+    expiresAt: bigint | number
+  }
+
+  export type UserRefreshTokenCreateOrConnectWithoutUserInput = {
+    where: UserRefreshTokenWhereUniqueInput
+    create: XOR<UserRefreshTokenCreateWithoutUserInput, UserRefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserRefreshTokenCreateManyUserInputEnvelope = {
+    data: UserRefreshTokenCreateManyUserInput | UserRefreshTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserRefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserRefreshTokenWhereUniqueInput
+    update: XOR<UserRefreshTokenUpdateWithoutUserInput, UserRefreshTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<UserRefreshTokenCreateWithoutUserInput, UserRefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserRefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserRefreshTokenWhereUniqueInput
+    data: XOR<UserRefreshTokenUpdateWithoutUserInput, UserRefreshTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserRefreshTokenUpdateManyWithWhereWithoutUserInput = {
+    where: UserRefreshTokenScalarWhereInput
+    data: XOR<UserRefreshTokenUpdateManyMutationInput, UserRefreshTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserRefreshTokenScalarWhereInput = {
+    AND?: UserRefreshTokenScalarWhereInput | UserRefreshTokenScalarWhereInput[]
+    OR?: UserRefreshTokenScalarWhereInput[]
+    NOT?: UserRefreshTokenScalarWhereInput | UserRefreshTokenScalarWhereInput[]
+    id?: IntFilter<"UserRefreshToken"> | number
+    userId?: IntFilter<"UserRefreshToken"> | number
+    token?: StringFilter<"UserRefreshToken"> | string
+    createdAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    usedAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+    expiresAt?: BigIntFilter<"UserRefreshToken"> | bigint | number
+  }
+
+  export type UserCreateWithoutUserRefreshTokensInput = {
+    username: string
+    email: string
+    password: string
+    name: string
+    lastName: string
+    createdAt?: Date | string
+  }
+
+  export type UserUncheckedCreateWithoutUserRefreshTokensInput = {
+    id?: number
+    username: string
+    email: string
+    password: string
+    name: string
+    lastName: string
+    createdAt?: Date | string
+  }
+
+  export type UserCreateOrConnectWithoutUserRefreshTokensInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserRefreshTokensInput, UserUncheckedCreateWithoutUserRefreshTokensInput>
+  }
+
+  export type UserUpsertWithoutUserRefreshTokensInput = {
+    update: XOR<UserUpdateWithoutUserRefreshTokensInput, UserUncheckedUpdateWithoutUserRefreshTokensInput>
+    create: XOR<UserCreateWithoutUserRefreshTokensInput, UserUncheckedCreateWithoutUserRefreshTokensInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserRefreshTokensInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserRefreshTokensInput, UserUncheckedUpdateWithoutUserRefreshTokensInput>
+  }
+
+  export type UserUpdateWithoutUserRefreshTokensInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutUserRefreshTokensInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserRefreshTokenCreateManyUserInput = {
+    id?: number
+    token: string
+    createdAt: bigint | number
+    usedAt: bigint | number
+    expiresAt: bigint | number
+  }
+
+  export type UserRefreshTokenUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type UserRefreshTokenUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type UserRefreshTokenUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    usedAt?: BigIntFieldUpdateOperationsInput | bigint | number
+    expiresAt?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
     /**
+     * @deprecated Use UserCountOutputTypeDefaultArgs instead
+     */
+    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserRefreshTokenDefaultArgs instead
+     */
+    export type UserRefreshTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserRefreshTokenDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SongDefaultArgs instead
      */

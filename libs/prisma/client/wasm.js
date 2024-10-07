@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.19.1
- * Query Engine version: 06fc58a368dc7be9fbbbe894adf8d445d208c284
+ * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
  */
 Prisma.prismaVersion = {
   client: "5.19.1",
-  engine: "06fc58a368dc7be9fbbbe894adf8d445d208c284"
+  engine: "69d742ee20b815d88e17e54db4a2a7a3b30324e3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -121,8 +121,21 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  username: 'username',
+  email: 'email',
+  password: 'password',
   name: 'name',
-  email: 'email'
+  lastName: 'lastName',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserRefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  createdAt: 'createdAt',
+  usedAt: 'usedAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.SongScalarFieldEnum = {
@@ -144,6 +157,7 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  UserRefreshToken: 'UserRefreshToken',
   Song: 'Song'
 };
 
