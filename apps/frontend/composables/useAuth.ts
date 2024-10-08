@@ -1,13 +1,30 @@
+import type { UserSignUp } from "~/libs/shared-types";
+
 const apiPath = "http://localhost:9000/api";
 
 export function useAuth() {
   const router = useRouter();
   const userStore = useUserStore();
 
-  async function signUp() {}
+  async function signUp(userData: UserSignUp) {
+    const result = await useFetch<string>(`${apiPath}/auth/sign-up`, {
+      body: {
+        ...userData,
+      },
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (!result.error.value) {
+      userStore.set(result.data.value);
+      router.replace("/");
+    }
+
+    return { ...result };
+  }
 
   async function signIn(username: string, password: string) {
-    const accessToken = await $fetch<string>(`${apiPath}/auth/sign-in`, {
+    const result = await useFetch<string>(`${apiPath}/auth/sign-in`, {
       body: {
         username,
         password,
@@ -16,10 +33,12 @@ export function useAuth() {
       credentials: "include",
     });
 
-    userStore.set(accessToken);
-    router.replace("/");
+    if (!result.error.value) {
+      userStore.set(result.data.value);
+      router.replace("/");
+    }
 
-    return { accessToken };
+    return { ...result };
   }
 
   async function logout() {
