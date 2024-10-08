@@ -1,28 +1,54 @@
 <script setup lang="ts">
-const username = ref("");
-const password = ref("");
+const { signIn: _signIn } = useAuth();
+const { createField, validateAll } = useValidate();
 
-const { signIn } = useAuth();
+const serverError = ref<string | undefined>("");
+const usernameField = createField<string>().notEmpty("Username is empty!");
+const passwordField = createField<string>().notEmpty("Password is empty!");
+
+async function signIn() {
+  serverError.value = "";
+
+  if (validateAll()) {
+    return;
+  }
+
+  const { error } = await _signIn(usernameField.value!, passwordField.value!);
+  if (error.value) {
+    serverError.value = error.value.data.message;
+  }
+}
 </script>
 
 <template>
-  <h1>Sign In</h1>
-  <p>Welcome back</p>
+  <AuthForm>
+    <template #headerContent>
+      <h1>Sign In</h1>
+    </template>
 
-  <form
-    class="mt-8 flex flex-col gap-6"
-    @submit.prevent="signIn(username, password)"
-  >
-    <AppInputGroup>
-      <AppInput label="Username" v-model="username" />
-      <AppInput label="Password" type="password" v-model="password" />
-    </AppInputGroup>
+    <template #formContent>
+      <AppInputGroup>
+        <AppInputText
+          label="Username"
+          :isError="usernameField.isError"
+          :error="usernameField.error"
+          v-model="usernameField.value"
+        />
+        <AppInputPassword
+          label="Password"
+          :isError="passwordField.isError"
+          :error="passwordField.error"
+          v-model="passwordField.value"
+        />
+      </AppInputGroup>
 
-    <button
-      class="mt-4 self-start rounded-md bg-zinc-200 px-8 py-1.5 font-semibold text-zinc-950 hover:bg-zinc-100"
-      type="submit"
-    >
-      Sign In
-    </button>
-  </form>
+      <AuthFormButton type="submit" @click.prevent="signIn()">
+        Sign In
+      </AuthFormButton>
+
+      <AppBaseInputError>
+        {{ serverError }}
+      </AppBaseInputError>
+    </template>
+  </AuthForm>
 </template>
