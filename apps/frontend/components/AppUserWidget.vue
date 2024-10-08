@@ -39,12 +39,3 @@ const { logout } = useAuth();
     </ClientOnly>
   </div>
 </template>
-
-<!-- <button
-          class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-t from-[--color-accent-950] to-[--color-accent-800]"
-          @click="logout"
-        >
-          <span class="text-lg">
-            {{ userStore.user.username[0].toUpperCase() }}
-          </span>
-        </button> -->
