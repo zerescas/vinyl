@@ -33,6 +33,34 @@ export class AuthService {
   }
 
   async signUp(userData: UserSignUp): Promise<ITokens> {
+    if (!userData.username.trim()) {
+      throw new BadRequestException({
+        code: "EMPTY_USERNAME",
+        message: "No username provided",
+      });
+    }
+
+    if (!userData.password.trim()) {
+      throw new BadRequestException({
+        code: "EMPTY_PASSWORD",
+        message: "No password provided",
+      });
+    }
+
+    if (!userData.email.trim()) {
+      throw new BadRequestException({
+        code: "EMPTY_EMAIL",
+        message: "No email provided",
+      });
+    }
+
+    if (!userData.name.trim()) {
+      throw new BadRequestException({
+        code: "EMPTY_NAME",
+        message: "No name provided",
+      });
+    }
+
     const existingUser = await this.usersService.find({
       OR: [{ username: userData.username }, { email: userData.email }],
     });
@@ -72,11 +100,28 @@ export class AuthService {
   }
 
   async signIn(userData: UserSignIn): Promise<ITokens> {
+    if (!userData.username.trim()) {
+      throw new BadRequestException({
+        code: "EMPTY_USERNAME",
+        message: "No username provided",
+      });
+    }
+
+    if (!userData.password.trim()) {
+      throw new BadRequestException({
+        code: "EMPTY_PASSWORD",
+        message: "No password provided",
+      });
+    }
+
     const user = await this.usersService.find({ username: userData.username });
 
     // Check if user exists
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException({
+        code: "WRONG_CREDENTIALS",
+        message: "Wrong username or password",
+      });
     }
 
     // Check if password right
@@ -85,7 +130,10 @@ export class AuthService {
       user.password,
     );
     if (!isPasswordRight) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException({
+        code: "WRONG_CREDENTIALS",
+        message: "Wrong username or password",
+      });
     }
 
     // Create tokens pair
