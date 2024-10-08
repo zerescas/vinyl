@@ -1,1 +1,10 @@
 @import url("./transitions.css");
+
+:root {
+  /* Color accents */
+
+  /* Default RGB (Next, redefined from JS) */
+  --rgb-accent-800: 255 0 139;
+  --rgb-accent-900: 255 0 114;
+  --rgb-accent-950: 255 0 88;
+}

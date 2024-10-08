@@ -15,7 +15,7 @@ const { logout } = useAuth();
           </div>
           |
           <button
-            class="transition-colors duration-300 hover:text-[--color-accent-800]"
+            class="hover:text-accent-800 transition-colors duration-300"
             @click="logout"
           >
             Logout
@@ -24,13 +24,13 @@ const { logout } = useAuth();
 
         <div v-else>
           <NuxtLink
-            class="transition-colors duration-300 hover:text-[--color-accent-800]"
+            class="hover:text-accent-800 transition-colors duration-300"
             to="/auth/sign-up"
             >Sign Up
           </NuxtLink>
           |
           <NuxtLink
-            class="transition-colors duration-300 hover:text-[--color-accent-800]"
+            class="hover:text-accent-800 transition-colors duration-300"
             to="/auth/sign-in"
             >Sign In
           </NuxtLink>

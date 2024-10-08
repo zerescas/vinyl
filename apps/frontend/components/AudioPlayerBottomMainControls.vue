@@ -48,7 +48,7 @@ const { play, pause } = audioPlayerStore;
 
     <!-- Loop -->
     <button
-      class="hidden text-[--color-accent-950] drop-shadow-accent transition-colors hover:text-[--color-accent-800] sm:block"
+      class="text-accent-950 hover:text-accent-800 hidden drop-shadow-accent transition-colors sm:block"
     >
       <IcRoundLoop class="size-6 md:size-7" />
     </button>

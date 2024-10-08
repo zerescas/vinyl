@@ -2,7 +2,7 @@ export function defineColorShadesFromSongImage(image: string) {
   const root = document.documentElement;
 
   // TODO: get real img and get colors from it
-  const color = "#e04343";
+  const color = "#ffd458";
   /*
   A temporary list of good colors:
     - #e04343 - red
@@ -13,6 +13,6 @@ export function defineColorShadesFromSongImage(image: string) {
   const shades = generateColorShades(color, [800, 900]);
 
   for (let [shadeName, shadeColor] of Object.entries(shades)) {
-    root.style.setProperty(`--color-accent-${shadeName}`, shadeColor);
+    root.style.setProperty(`--rgb-accent-${shadeName}`, shadeColor);
   }
 }

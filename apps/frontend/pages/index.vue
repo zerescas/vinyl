@@ -9,7 +9,7 @@ const userStore = useUserStore();
     <p class="flex gap-2">
       Welcome,
       <ClientOnly>
-        <span class="font-bold text-[--color-accent-950] drop-shadow-accent-md">
+        <span class="text-accent-950 font-bold drop-shadow-accent-md">
           {{ userStore.user.username || "Stranger" }}
         </span>
 

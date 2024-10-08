@@ -99,7 +99,7 @@ const lastNameField = createField<string>();
         <div v-else>
           <span
             v-if="isShowSteps"
-            class="text-lg font-semibold text-[--color-accent-950]"
+            class="text-accent-950 text-lg font-semibold"
           >
             Step {{ steps.current }} of {{ steps.count }}
           </span>
@@ -121,7 +121,7 @@ const lastNameField = createField<string>();
         :class="{ 'drop-shadow-accent-md': isFinalStep }"
       >
         <div
-          class="h-1 bg-[--color-accent-950]"
+          class="bg-accent-950 h-1"
           :style="{ width: `${(steps.current / steps.count) * 100}%` }"
         ></div>
       </div>

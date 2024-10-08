@@ -77,7 +77,7 @@ onMounted(() => {
         class="ease flex items-center gap-4 transition-colors duration-300"
         :class="[
           button.to === $route.path
-            ? 'text-[--color-accent-950] drop-shadow-accent-md hover:text-[--color-accent-800]'
+            ? 'text-accent-950 hover:text-accent-800 drop-shadow-accent-md'
             : 'text-zinc-200 hover:text-zinc-50',
         ]"
         @click="handleButtonClick"

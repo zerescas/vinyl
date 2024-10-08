@@ -23,9 +23,7 @@ const { isExpanded } = storeToRefs(sidebarStore);
       :class="{ expanded: isExpanded }"
       to="/"
     >
-      <span class="font-bold text-[--color-accent-950] drop-shadow-accent"
-        >V</span
-      >
+      <span class="text-accent-950 font-bold drop-shadow-accent">V</span>
       <span>inyl</span>
     </RouterLink>
 

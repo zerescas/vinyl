@@ -1,4 +1,4 @@
-import { darken, lighten, toRgb } from "@jiaminghi/color";
+import { darken, getRgbValue, lighten } from "@jiaminghi/color";
 
 const defaultShades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
@@ -19,9 +19,15 @@ export function generateColorShades(
   // Generate color shades
   const result: Record<string, string> = {};
   for (let shade of shades) {
-    result[shade] = lighten(color, 100 - shade / 10);
+    const shadeColor = lighten(color, 100 - shade / 10);
+    result[shade] = toPlainRgb(shadeColor);
   }
-  result[950] = toRgb(color, 1);
+  result[950] = toPlainRgb(color);
 
   return result;
+}
+
+function toPlainRgb(color: string) {
+  const [r, g, b] = getRgbValue(color);
+  return `${r} ${g} ${b}`;
 }

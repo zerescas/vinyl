@@ -5,10 +5,18 @@ export default {
   },
   theme: {
     extend: {
+      colors: {
+        accent: {
+          800: "rgb(var(--rgb-accent-800) / <alpha-value>)",
+          900: "rgb(var(--rgb-accent-900) / <alpha-value>)",
+          950: "rgb(var(--rgb-accent-950) / <alpha-value>)",
+        },
+      },
+
       dropShadow: {
-        "accent-sm": "0 0 4px var(--color-accent-950)",
-        accent: "0 0 8px var(--color-accent-950)",
-        "accent-md": "0 0 16px var(--color-accent-950)",
+        "accent-sm": "0 0 4px rgb(var(--rgb-accent-950) / 0.85)",
+        accent: "0 0 8px rgb(var(--rgb-accent-950) / 0.85)",
+        "accent-md": "0 0 16px rgb(var(--rgb-accent-950) / 0.85)",
       },
 
       transitionProperty: {

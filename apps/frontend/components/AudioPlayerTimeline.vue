@@ -87,8 +87,8 @@ function handleEndSeek(e: PointerEvent) {
 .timeline-fg {
   background: linear-gradient(
     90deg,
-    var(--color-accent-950),
-    var(--color-accent-800)
+    theme(colors.accent.950),
+    theme(colors.accent.800)
   );
   height: 100%;
   pointer-events: none;
