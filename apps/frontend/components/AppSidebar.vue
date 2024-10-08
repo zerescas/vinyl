@@ -55,11 +55,12 @@ onMounted(() => {
 
 <template>
   <div
-    class="[&>*]:ease relative h-full [&>*]:z-10 [&>*]:h-full [&>*]:duration-300"
+    class="[&>*]:ease pointer-events-none relative h-full md:pointer-events-auto [&.expanded]:pointer-events-auto [&>*]:z-10 [&>*]:h-full [&>*]:duration-300"
+    :class="{ expanded: isExpanded }"
   >
     <!-- Background -->
     <div
-      class="pointer-events-none absolute w-full bg-zinc-950 bg-opacity-0 transition-colors [&.expanded]:pointer-events-auto [&.expanded]:bg-opacity-60 md:[&.expanded]:bg-opacity-0"
+      class="absolute w-full bg-zinc-950 bg-opacity-0 transition-colors [&.expanded]:bg-opacity-60 md:[&.expanded]:bg-opacity-0"
       :class="{ expanded: isExpanded }"
       @click="isExpanded = false"
     ></div>
