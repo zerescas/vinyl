@@ -1,3 +1,5 @@
+import plugin from "tailwindcss/plugin";
+
 export default {
   content: [],
   future: {
@@ -28,6 +30,21 @@ export default {
         xs: "350px",
         "2xs": "450px",
       },
+
+      width: {
+        sidepanel: "30rem",
+        "expanded-sidepanel": "30rem",
+        header: "30rem",
+        "visible-bottom-player": "30rem",
+      },
     },
   },
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant(
+        "sidebar-expanded",
+        ":merge(.group)[class~='is-sidebar-expanded'] &",
+      );
+    }),
+  ],
 };

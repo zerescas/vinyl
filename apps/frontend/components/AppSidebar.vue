@@ -55,20 +55,18 @@ onMounted(() => {
 
 <template>
   <div
-    class="[&>*]:ease pointer-events-none relative h-full md:pointer-events-auto [&.expanded]:pointer-events-auto [&>*]:z-10 [&>*]:h-full [&>*]:duration-300"
-    :class="{ expanded: isExpanded }"
+    class="[&>*]:ease pointer-events-none relative h-full sidebar-expanded:pointer-events-auto md:pointer-events-auto [&>*]:z-10 [&>*]:h-full [&>*]:duration-300"
   >
     <!-- Background -->
     <div
-      class="absolute w-full bg-zinc-950 bg-opacity-0 transition-colors [&.expanded]:bg-opacity-60 md:[&.expanded]:bg-opacity-0"
-      :class="{ expanded: isExpanded }"
+      class="absolute w-full bg-zinc-950 bg-opacity-0 transition-colors sidebar-expanded:bg-opacity-60 md:sidebar-expanded:bg-opacity-0"
       @click="isExpanded = false"
     ></div>
 
     <!-- Sidebar -->
     <div
-      class="group relative flex -translate-x-full flex-col gap-5 bg-zinc-900 bg-opacity-95 p-5 pt-20 shadow-[0_0_48px_0_rgba(0,0,0,0.4)] transition-[transform,background-color] md:translate-x-0 md:bg-opacity-50 [&.expanded]:w-full [&.expanded]:translate-x-0 2xs:[&.expanded]:w-64"
-      :class="[{ expanded: isExpanded }, isMobileMode ? '2xs:w-64' : 'w-fit']"
+      class="group relative flex -translate-x-full flex-col gap-5 bg-zinc-900 bg-opacity-95 p-5 pt-20 shadow-[0_0_48px_0_rgba(0,0,0,0.4)] transition-[transform,background-color] sidebar-expanded:w-full sidebar-expanded:translate-x-0 md:translate-x-0 md:bg-opacity-[--bg-panel-opacity-md] lg:sidebar-expanded:w-64"
+      :class="[isMobileMode ? '2xs:w-64' : 'w-fit']"
       @click.stop=""
     >
       <NuxtLink
@@ -78,7 +76,7 @@ onMounted(() => {
         class="ease flex items-center gap-4 transition-colors duration-300"
         :class="[
           button.to === $route.path
-            ? 'text-accent-950 hover:text-accent-800 drop-shadow-accent-md'
+            ? 'text-accent-950 drop-shadow-accent-md hover:text-accent-800'
             : 'text-zinc-200 hover:text-zinc-50',
         ]"
         @click="handleButtonClick"
@@ -86,7 +84,7 @@ onMounted(() => {
         <component class="size-7" :is="button.icon" />
         <span
           :class="[
-            { 'hidden group-[.expanded]:block': !isMobileMode },
+            { 'hidden sidebar-expanded:block': !isMobileMode },
             'font-semibold',
           ]"
           >{{ button.text }}</span

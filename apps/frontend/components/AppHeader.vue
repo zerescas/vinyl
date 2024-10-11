@@ -19,11 +19,10 @@ const { isExpanded } = storeToRefs(sidebarStore);
 
     <!-- App Title -->
     <RouterLink
-      class="z-10 ml-4 text-2xl tracking-wide transition-all md:ml-12 [&.expanded]:ml-4"
-      :class="{ expanded: isExpanded }"
+      class="z-10 ml-4 text-2xl tracking-wide transition-all sidebar-expanded:ml-4 md:ml-12"
       to="/"
     >
-      <span class="text-accent-950 font-bold drop-shadow-accent">V</span>
+      <span class="font-bold text-accent-950 drop-shadow-accent">V</span>
       <span>inyl</span>
     </RouterLink>
 
