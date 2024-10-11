@@ -55,7 +55,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="[&>*]:ease pointer-events-none relative h-full sidebar-expanded:pointer-events-auto md:pointer-events-auto [&>*]:z-10 [&>*]:h-full [&>*]:duration-300"
+    class="[&>*]:ease pointer-events-none h-full sidebar-expanded:pointer-events-auto md:pointer-events-auto [&>*]:z-10 [&>*]:h-full [&>*]:duration-300"
   >
     <!-- Background -->
     <div
@@ -65,15 +65,15 @@ onMounted(() => {
 
     <!-- Sidebar -->
     <div
-      class="group relative flex -translate-x-full flex-col gap-5 bg-zinc-900 bg-opacity-95 p-5 pt-20 shadow-[0_0_48px_0_rgba(0,0,0,0.4)] transition-[transform,background-color] sidebar-expanded:w-full sidebar-expanded:translate-x-0 md:translate-x-0 md:bg-opacity-[--bg-panel-opacity-md] lg:sidebar-expanded:w-64"
-      :class="[isMobileMode ? '2xs:w-64' : 'w-fit']"
+      class="relative flex -translate-x-full flex-col gap-5 bg-zinc-900 bg-opacity-95 p-[--padding-x-sidebar] pt-20 shadow-[0_0_48px_0_rgba(0,0,0,0.4)] transition-[transform,background-color] sidebar-expanded:w-full sidebar-expanded:translate-x-0 2xs:sidebar-expanded:w-64 md:translate-x-0 md:bg-opacity-75"
+      :class="[isMobileMode ? 'w-full 2xs:w-64' : 'w-fit']"
       @click.stop=""
     >
       <NuxtLink
         v-for="button in buttons"
         :key="button.text"
         :to="button.to"
-        class="ease flex items-center gap-4 transition-colors duration-300"
+        class="ease flex items-center gap-[--gap-sidebar-item] transition-colors duration-300"
         :class="[
           button.to === $route.path
             ? 'text-accent-950 drop-shadow-accent-md hover:text-accent-800'

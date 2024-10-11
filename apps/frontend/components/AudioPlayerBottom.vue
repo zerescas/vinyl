@@ -9,9 +9,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="relative z-10 flex flex-col bg-zinc-900 shadow-[0_0_48px_0_rgba(0,0,0,0.4)]"
-  >
+  <div class="flex flex-col bg-zinc-900 shadow-[0_0_48px_0_rgba(0,0,0,0.4)]">
     <!-- Timeline -->
     <AudioPlayerTimeline />
 

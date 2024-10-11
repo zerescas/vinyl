@@ -1,25 +1,60 @@
 <script setup lang="ts">
 const sidebarStore = useSidebarStore();
 const { isExpanded } = storeToRefs(sidebarStore);
+
+const windowStore = useWindowStore();
+const { isTopArrived } = storeToRefs(windowStore);
 </script>
 
 <template>
   <div
-    class="group grid h-screen grid-cols-1 grid-rows-[auto_1fr_auto] md:grid-cols-[auto_1fr]"
-    :class="{ 'is-sidebar-expanded': isExpanded }"
+    class="group grid h-screen"
+    :class="{
+      'is-sidebar-expanded': isExpanded,
+      'scroll-on-top': isTopArrived,
+    }"
   >
-    <div class="col-start-2 row-span-2 row-start-1"></div>
+    <AppSidebar class="fixed top-0 z-10 w-full md:w-auto" />
 
-    <AppSidebar class="col-start-1 row-span-2 row-start-1" />
+    <AppHeader class="fixed top-0 z-10 ml-auto w-full" />
 
-    <AppHeader class="col-span-2 col-start-1 row-start-1" />
+    <AppAudioBackgroundCover class="fixed top-0 h-full w-full" />
 
-    <div class="col-start-1 row-start-2 p-6 md:col-start-2">
-      <slot />
+    <!-- Content -->
+    <div
+      class="content ml-auto mt-8 px-[--padding-x-content] pb-48 pt-[--height-header]"
+    >
+      <div class="mx-auto max-w-[--max-width-content]">
+        <slot />
+      </div>
     </div>
 
     <ClientOnly>
-      <AudioPlayerBottom class="col-span-full row-start-3" />
+      <AudioPlayerBottom class="fixed bottom-0 z-10 w-full" />
     </ClientOnly>
   </div>
 </template>
+
+<style scoped>
+.is-sidebar-expanded {
+  --width-sidebar: var(--width-sidebar-expanded);
+}
+
+.header {
+  max-width: 100%;
+  width: 100%;
+
+  @media screen(md) {
+    max-width: calc(100% - var(--width-sidebar));
+  }
+}
+
+.content {
+  max-width: 100%;
+  width: 100%;
+
+  @media screen(md) {
+    max-width: calc(100% - var(--width-sidebar));
+  }
+}
+</style>
