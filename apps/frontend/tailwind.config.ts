@@ -45,6 +45,11 @@ export default {
         "sidebar-expanded",
         ":merge(.group)[class~='is-sidebar-expanded'] &",
       );
+
+      addVariant(
+        "sidebar-not-expanded",
+        ":merge(.group):not([class~='is-sidebar-expanded']) &",
+      );
     }),
   ],
 };
